@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html id="app" lang="es">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="stylesheet" href="/css/estilo.css">
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda de tennis</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  
+ </div>
+  <div class="total">
+    <p class="precio">Precio </p>
+    <p class="valor" id="din">35<span>$</span></p>
+  </div>
+
+  <div class="articulo">
+    <p class="precio">Producto </p>
+    <p class="nombredearticulo">Converse Alta</p>
+    <button  id="rotacion" type="button" class="btn btn-light ms-5">Girar</button>
+    <button  id="parar" type="button" class="btn btn-light ms-1">Restaurar</button>
+  </div>
+
+
+
+
+
+  <a id="b" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list"
+      viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+    </svg>
+  </a>
+
+
+  <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomLabel">Personalizar Tenis
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body small">
+      <div class="m-3">
+
+        <div class="m-3">
+          <h4 class="my-3">Tela</h4>
+          <select id="tela" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option selected>Eliga tipo de tela</option>
+            <option value="normal">Tela normal</option>
+            <option value="jean">Tela jean</option>
+
+          </select>
+        </div>
+
+
+        <div id="colores" class="m-3">
+          <h4 class="my-3">Colores</h4>
+          <select id="colorestelanormal" class="form-select" multiple aria-label="multiple select example">
+            <option selected>Eliga tipo color</option>
+            <option value="1">Rojo</option>
+            <option value="2">Verde</option>
+            <option value="3">Azul</option>
+            <option value="4">Amarillo</option>
+            <option value="5">Blanco</option>
+            <option value="6">Negro</option>
+          </select>
+        </div>
+
+
+
+        <div id="coloresjean" class="m-3 focus">
+          <h4 class="my-3">Colores</h4>
+          <select id="colorestelajean" class="form-select" multiple aria-label="multiple select example">
+            <option selected>Eliga tipo color</option>
+            <option value="1">Azul </option>
+            <option value="2">Negro</option>
+          </select>
+        </div>
+
+
+        <div class="m-3">
+          <h4 class="my-3">Colores de Cordones</h4>
+          <select id="colorescordones" class="form-select" multiple aria-label="multiple select example">
+            <option selected>Eliga tipo color</option>
+            <option value="1">Rojo</option>
+            <option value="2">Verde</option>
+            <option value="3">Azul</option>
+            <option value="4">Amarillo</option>
+            <option value="5">Blanco</option>
+            <option value="6">Negro</option>
+          </select>
+
+
+
+
+        </div>
+
+
+
+
+        <button id="btnguardar" type="button" class="btn colorbtn" data-bs-dismiss="offcanvas">Guardar</button>
+
+
+
+
+      </div>
+    </div>
+  </div>
+  <script>
+  const audio = new Audio("../music/sonidoerror.mp3");
+  const audiofondo = new Audio("../music/sondi1.mp3");
+  const audionotificacion = new Audio("../music/notificacion.mp3");
+
+   const app = document.getElementById("app")
+    
+   app.addEventListener("mouseover",()=>{
+    audiofondo.play()
+   })
+
+    setTimeout(()=>{
+      
+      let timerInterval
+
+            Swal.fire({
+                title: 'Cargando',
+                html: 'Espere...',
+                timer: 800,
+                timerProgressBar: true,
+                didOpen: () => {
+                    
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+ 
+                    timerInterval = setInterval(() => {
+                        b.textContent = Swal.getTimerLeft()
+                       
+                    }, 50)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                  
+                }
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+            })
+            
+         
+    },50)
+  </script>
+
+  <script src="js/three.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  <script src="OBJLoader.js"></script>
+  
+  <script>
+
+    const selectdetela = document.getElementById("tela")
+    const colores = document.getElementById("colores")
+    const Selectordecolorjean = document.getElementById("coloresjean")
+    const selecttipodecolor = document.getElementById("colorestelajean")
+    const Selectordecoloresnormal = document.getElementById("colorestelanormal")
+
+    const precio = document.getElementById("din")
+    const btnguardar = document.getElementById("btnguardar")
+    const rotacion = document.getElementById("rotacion")
+    const parar = document.getElementById("parar")
+    
+
+    const selectcolorcordones = document.getElementById("colorescordones")
+    let preciotela = 0
+
+    colores.style.visibility = "hidden";
+    Selectordecolorjean.style.visibility = "hidden";
+
+    selectdetela.onchange = () => {
+
+      if (selectdetela.value == "jean") {
+        colores.style.visibility = "hidden";
+        Selectordecolorjean.style.visibility = "visible";
+        preciotela = 30
+        document.getElementById('din').innerHTML = preciotela + "$";
+      } else {
+        colores.style.visibility = "visible";
+        Selectordecolorjean.style.visibility = "hidden";
+        preciotela = 20
+        document.getElementById('din').innerHTML = preciotela + "$";
+      }
+
+    
+    }
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const cpolor = {
+      color: "#EFEBEF",
+    };
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(cpolor.color);
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+
+
+    const texturasuelo = new THREE.TextureLoader().load("./textura/piso1.webp");
+    texturasuelo.wrapS = THREE.RepeatWrapping;
+    texturasuelo.wrapT = THREE.RepeatWrapping;
+    texturasuelo.repeat.set(4, 4);
+    ///ceando scenario para los tenis disparatoso eso
+    const Planosuelo = new THREE.PlaneGeometry(100, 100);
+    const material = new THREE.MeshBasicMaterial({
+      map: texturasuelo,
+      side: THREE.DoubleSide,
+    });
+
+    const suelo = new THREE.Mesh(Planosuelo, material);
+    suelo.rotation.x = Math.PI / 2
+
+    const planopared = new THREE.PlaneGeometry(100, 100);
+    const material1 = new THREE.MeshBasicMaterial({
+      map: texturasuelo,
+      side: THREE.DoubleSide,
+    });
+    scene.add(suelo);
+
+    ///render de los tenis conver
+    const loader = new THREE.OBJLoader();
+
+
+
+    loader.load(
+      "models/converse.obj",
+
+      function (object) {
+       
+        scene.add(object);
+        ///textura de los telas de los tennis
+        const telajeannegra = new THREE.TextureLoader().load("./models/bump.jpg");
+        const telajeanazul = new THREE.TextureLoader().load("./models/converse.jpg");
+      
+        ///tela normal
+        const normalamarilla = new THREE.TextureLoader().load("./models/conversetelaamarilla.png");
+        const normalazul = new THREE.TextureLoader().load("./models/conversetelaazul.png");
+        const normalroja = new THREE.TextureLoader().load("./models/conversetelaroja.png");
+        const normalblanca = new THREE.TextureLoader().load("./models/conversetelablanco.png");
+        const normalnegra = new THREE.TextureLoader().load("./models/conversetelanegra.png");
+        const normalverde = new THREE.TextureLoader().load("./models/conversetelaverder.png");
+
+
+        ///textura de los cordones
+        const Tex_col_rojo = new THREE.TextureLoader().load("./models/cordones/telaroja.webp");
+        const Tex_col_amarilla = new THREE.TextureLoader().load("./models/cordones/telaamarilla.jpg");
+        const Tex_col_azul = new THREE.TextureLoader().load("./models/cordones/telaazul.jfif");
+        const Tex_col_verde = new THREE.TextureLoader().load("./models/cordones/telaverde.jpg");
+        const Tex_col_negro = new THREE.TextureLoader().load("./models/cordones/telanegra.jpg");
+        const Tex_col_blanco = new THREE.TextureLoader().load("./models/cordones/telablanca.jfif");
+        const templa = new THREE.TextureLoader().load("./models/tample.png");
+
+
+        for (let i = 0; i <= 17; i++) {
+          object.children[i].material = new THREE.MeshPhongMaterial({
+            map: templa,
+          });
+        }
+        for (let i = 19; i <= 36; i++) {
+          object.children[i].material = new THREE.MeshPhongMaterial({
+            map: templa,
+          });
+        }
+
+
+
+        /// select de de colores jean
+        selecttipodecolor.onchange = () => {
+          if (selecttipodecolor.value == 1) {
+            for (let i = 0; i <= 17; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: telajeanazul,
+              });
+            }
+            for (let i = 19; i <= 36; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: telajeanazul,
+              });
+            }
+          } else if (selecttipodecolor.value == 2) {
+            for (let i = 0; i <= 17; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: telajeannegra,
+              });
+            }
+            for (let i = 19; i <= 36; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: telajeannegra,
+              });
+            }
+          }
+        }
+        /// select de colores de tela normal 
+
+        Selectordecoloresnormal.onchange = () => {
+          
+
+       if (Selectordecoloresnormal.value == 1) {
+
+            for (let i = 0; i <= 17; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalroja,
+              });
+            }
+            for (let i = 19; i <= 36; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalroja,
+              });
+            }
+
+          } else if (Selectordecoloresnormal.value == 2) {
+
+            for (let i = 0; i <= 17; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalverde,
+              });
+            }
+            for (let i = 19; i <= 36; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalverde,
+              });
+            }
+
+          } else if (Selectordecoloresnormal.value == 3) {
+
+            for (let i = 0; i <= 17; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalazul,
+              });
+            }
+            for (let i = 19; i <= 36; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalazul,
+              });
+            }
+
+          } else if (Selectordecoloresnormal.value == 4) {
+
+            for (let i = 0; i <= 17; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalamarilla,
+              });
+            }
+            for (let i = 19; i <= 36; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalamarilla,
+              });
+            }
+
+          } else if (Selectordecoloresnormal.value == 5) {
+
+            for (let i = 0; i <= 17; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalblanca,
+              });
+            }
+            for (let i = 19; i <= 36; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalblanca,
+              });
+            }
+
+          } else if (Selectordecoloresnormal.value == 6) {
+
+            for (let i = 0; i <= 17; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalnegra,
+              });
+            }
+            for (let i = 19; i <= 36; i++) {
+              object.children[i].material = new THREE.MeshPhongMaterial({
+                map: normalnegra,
+              });
+            }
+
+          }
+        }
+        /// este es el select de los cordones 
+        selectcolorcordones.onchange = () => {
+          if (selectcolorcordones.value == 1) {
+            object.children[18].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_rojo,
+            })
+            object.children[37].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_rojo,
+            })
+          }
+          else if (selectcolorcordones.value == 2) {
+            object.children[18].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_verde,
+            })
+            object.children[37].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_verde,
+            })
+          }
+          else if (selectcolorcordones.value == 3) {
+            object.children[18].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_azul,
+            })
+            object.children[37].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_azul,
+            })
+          }
+          else if (selectcolorcordones.value == 4) {
+            object.children[18].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_amarilla,
+            })
+            object.children[37].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_amarilla,
+            })
+          }
+          else if (selectcolorcordones.value == 5) {
+            object.children[18].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_blanco,
+            })
+            object.children[37].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_blanco,
+            })
+          }
+          else if (selectcolorcordones.value == 6) {
+            object.children[18].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_negro,
+            })
+            object.children[37].material = new THREE.MeshPhongMaterial({
+              map: Tex_col_negro,
+            })
+          }
+        }
+        // index 18 y 37 son los cordones
+
+        //propiedades que nose bien que son
+        // object.castShadow = true;
+        
+      
+         rotacion.onclick = () =>{
+           setTimeout(function () { object.rotation.y +=1 }, 9);
+         }
+         parar.onclick = () =>{
+           setTimeout(function () { object.rotation.y = 0.01 },9);
+          
+         }
+      
+      },
+      // called when loading is in progresses
+      function (xhr) {
+        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+      },
+      // called when loading has errors
+      function (error) {
+        console.log("An error happened");
+      }
+    );
+
+    //Ends here
+    camera.position.z = 30;
+    camera.position.y = 20;
+    camera.rotation.z = 15;
+    let orbitControl = new THREE.OrbitControls(camera, renderer.domElement);
+
+    const light = new THREE.AmbientLight();
+    scene.add(light);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      orbitControl.update();
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+
+    btnguardar.onclick = () => {
+      if (selectdetela.value == "jean" || selectdetela.value == "normal" ) {
+        audionotificacion.play()
+        Swal.fire(
+          'Cambio Realizado',
+          'Gregory es la foking para!',
+          'success'
+        )
+        audionotificacion.play()
+       
+      }
+      else {
+        audio.play()
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops... No seleccionaste nada',
+          text: 'Leandro haga la cosa bien!',
+          footer: '<a href="https://www.churchofjesuschrist.org/topics/families-and-individuals/lifes-challenges/hope-and-help?lang=spa">Revisa para que te ayude en la vida</a>'
+        })
+       
+      }
+    }
+
+  </script>
+
+
+
+</body>
+
+</html>

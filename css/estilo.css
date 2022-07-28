@@ -1,0 +1,96 @@
+#b{
+    margin: 30px;
+    color:blueviolet;
+    background-color: white ;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+
+}
+#b:hover{
+    color:white;
+    background-color: blueviolet;
+}
+.focus{
+   visibility: hidden;
+}
+
+.total{
+    margin-left: 110px;
+    margin-top: 30px;
+    padding: 3px;    color:blueviolet;
+    background-color: white ;
+    border: none;
+    width: 150px;
+    height: 50px;
+    border-radius: 15px;
+    position: absolute;
+    display: flex;
+}
+.precio{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    margin-left: 3px;
+    margin-top: 10px;
+}
+.valor{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    margin-top:  10px;
+    margin-left: 10px;
+}
+
+.articulo{
+    margin-left: 220px;
+    margin-top: 30px;
+    padding: 3px;    color:blueviolet;
+    background-color: white ;
+    border: none;
+    width: 450px;
+    height: 50px;
+    border-radius: 15px;
+    position: absolute;
+    display: flex;
+}
+.nombredearticulo{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: normal;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.cotenerdordescriptivo{
+    margin-left: 10px;
+    margin-top: 200px;
+    padding: 3px;    color:blueviolet;
+    background-color: white ;
+    border: none;
+    width: 200px;
+    border-radius: 11px;
+    position: absolute;
+    display: flex;
+    padding: 12PX;
+
+}
+
+.central{
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.precio{
+    margin-left: 20px;
+}
